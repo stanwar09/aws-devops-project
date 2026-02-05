@@ -21,6 +21,7 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          sudo docker stop nginx || true
-          sudo docker rm nginx || true
-          sudo docker run -d -p 80:80 --name nginx nginx
+          sudo docker stop $(sudo docker ps -aq) || true
+          sudo docker rm $(sudo docker ps -aq) || true
+          sudo docker run -d -p 80:80 nginx
+
